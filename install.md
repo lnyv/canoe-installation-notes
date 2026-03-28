@@ -33,7 +33,7 @@
 
 `packages_centos.txt`要求安装这些库:
 
-`
+```bash
 clang-tools-extra (x)
 
 cmake (自己安装)
@@ -55,13 +55,13 @@ fftw-devel (有)
 blas-devel (有)
 
 lapack-devel (?)
-`
+```
 
 ### 服务器中已有的module
 
 加载服务器已有的module:
 
-`
+```bash
 module load compiler/devtoolset/7.3.1
 
 module load python/3.8.10
@@ -71,17 +71,17 @@ module load mathlib/netcdf/c4.9.2_f4.6.1-gcc731
 module load mathlib/nco/4.6.7/intel
 
 module load mathlib/ncview/2.1.7/intel
-`
+```
 
 验证:
 
-`
+```bash
 which gcc
 
 which python
 
 which nc-config
-`
+```
 
 
 ### 我手动安装的
@@ -90,37 +90,37 @@ which nc-config
 
 服务器中cmake版本过低，需要手动安装，执行命令行:
 
-`
+```bash
 cd ~/opt
 
 wget https://github.com/Kitware/CMake/releases/download/v3.29.6/cmake-3.29.6-linux-x86_64.tar.gz
 
 tar -xzf cmake-3.29.6-linux-x86_64.tar.gz
-`
+```
 
 加入path:
 
-`
+```bash
 export PATH=$HOME/opt/cmake-3.29.6-linux-x86_64/bin:$PATH
-`
+```
 
 验证:
 
-`
+```bash
 cmake --version
-`
+```
 
 #### Eigen3
 
 不记得为什么这个库是手动安装的了，执行命令行:
 
-`
+```bash
 cd ~/opt
 
 wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 
 tar -xzf eigen-3.4.0.tar.gz
-`
+```
 
 #### 注意
 
@@ -134,19 +134,19 @@ tar -xzf eigen-3.4.0.tar.gz
 
 创造`pyenv`虚拟环境需要先load python模块: 
 
-`
+```bash
 module load python/3.8.10
-`
+```
 
 执行命令行:
 
-`
+```bash
 python -m venv pyenv
 
 source pyenv/bin/activate
 
 pip install -r requirements.txt
-`
+```
 
 这一部分结束了，照着README继续安装 -> (如果失败了就看一下文档)
 
@@ -156,7 +156,7 @@ pip install -r requirements.txt
 
 执行命令行，并注意使用example配置:
 
-`
+```bash
 cd ~/canoe-1.4
 
 mkdir build
@@ -167,35 +167,35 @@ cmake .. -C ../cmake/examples/rcemip.cmake \
   -DEIGEN3_INCLUDE_DIR=$HOME/opt/eigen-3.4.0
 
 make -j4
-`
+```
 
 ## Dropbox下载失败
 
 如一些辐射数据，李成老师会放在dropbox中，如果无法访问，需要在本地下载->上传至服务器data文件夹中->手动解压
 
-`
+```bash
 tar -xzf *.tar.gz
-`
+```
 
 ## wget报错
 
-`
+```bash
 wget: unrecognized option '--show-progress'
-`
+```
 
 解决:
 
-`
+```bash
 cd ~/canoe-1.4
 
 sed -i 's/--show-progress//g' data/fetch_*.sh
-`
+```
 
 # 创建环境脚本（推荐）
 
 创建`~/canoe_env.sh`
 
-`
+```bash
 module load compiler/devtoolset/7.3.1
 
 module load python/3.8.10
@@ -217,12 +217,12 @@ export PATH=$CANOE_HOME/build/bin:$PATH
 export PYTHONPATH=$CANOE_HOME/build/python:$PYTHONPATH
 
 echo "[Canoe] environment loaded"
-`
+```
 
 在~/.bashrc中添加:
 
-`
+```bash
 alias canoe='source ~/canoe_env.sh'
-`
+```
 
 使用`canoe`来加载canoe所需要的环境
