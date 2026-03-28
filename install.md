@@ -35,25 +35,15 @@
 
 ```bash
 clang-tools-extra (x)
-
 cmake (自己安装)
-
 nco (module)
-
 ncview (module)
-
 netcdf-devel (module)
-
 boost-devel (x)
-
 eigen3-devel (自己安装)
-
 glog-devel （x）
-
 fftw-devel (有)
-
 blas-devel (有)
-
 lapack-devel (?)
 ```
 
@@ -63,13 +53,9 @@ lapack-devel (?)
 
 ```bash
 module load compiler/devtoolset/7.3.1
-
 module load python/3.8.10
-
 module load mathlib/netcdf/c4.9.2_f4.6.1-gcc731
-
 module load mathlib/nco/4.6.7/intel
-
 module load mathlib/ncview/2.1.7/intel
 ```
 
@@ -77,9 +63,7 @@ module load mathlib/ncview/2.1.7/intel
 
 ```bash
 which gcc
-
 which python
-
 which nc-config
 ```
 
@@ -92,9 +76,7 @@ which nc-config
 
 ```bash
 cd ~/opt
-
 wget https://github.com/Kitware/CMake/releases/download/v3.29.6/cmake-3.29.6-linux-x86_64.tar.gz
-
 tar -xzf cmake-3.29.6-linux-x86_64.tar.gz
 ```
 
@@ -116,9 +98,7 @@ cmake --version
 
 ```bash
 cd ~/opt
-
 wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
-
 tar -xzf eigen-3.4.0.tar.gz
 ```
 
@@ -142,9 +122,7 @@ module load python/3.8.10
 
 ```bash
 python -m venv pyenv
-
 source pyenv/bin/activate
-
 pip install -r requirements.txt
 ```
 
@@ -158,14 +136,10 @@ pip install -r requirements.txt
 
 ```bash
 cd ~/canoe-1.4
-
 mkdir build
-
 cd build
-
 cmake .. -C ../cmake/examples/rcemip.cmake \
   -DEIGEN3_INCLUDE_DIR=$HOME/opt/eigen-3.4.0
-
 make -j4
 ```
 
@@ -187,7 +161,6 @@ wget: unrecognized option '--show-progress'
 
 ```bash
 cd ~/canoe-1.4
-
 sed -i 's/--show-progress//g' data/fetch_*.sh
 ```
 
@@ -197,25 +170,15 @@ sed -i 's/--show-progress//g' data/fetch_*.sh
 
 ```bash
 module load compiler/devtoolset/7.3.1
-
 module load python/3.8.10
-
 module load mathlib/netcdf/c4.9.2_f4.6.1-gcc731
-
 module load mathlib/nco/4.6.7/intel
-
 module load mathlib/ncview/2.1.7/intel
-
 source ~/canoe-1.4/pyenv/bin/activate
-
 export PATH=$HOME/opt/cmake-3.29.6-linux-x86_64/bin:$PATH
-
 export CANOE_HOME=$HOME/canoe-1.4
-
 export PATH=$CANOE_HOME/build/bin:$PATH
-
 export PYTHONPATH=$CANOE_HOME/build/python:$PYTHONPATH
-
 echo "[Canoe] environment loaded"
 ```
 
